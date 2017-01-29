@@ -1,6 +1,6 @@
 package com.company.service;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class SupplierService extends AbstractNamedService<Supplier> implements I
 	
 	@Autowired
 	@Qualifier("supplierFile")
-	private File supplierFile;
+	private InputStream supplierFile;
 	
 	@Autowired 
 	private ProductSupplierService productSupplierService;
@@ -35,7 +35,7 @@ public class SupplierService extends AbstractNamedService<Supplier> implements I
 			initialiseSuppliedProducts();
 	}
 	
-	public SupplierService(File fileStore, ProductSupplierService productSupplierService) {
+	public SupplierService(InputStream fileStore, ProductSupplierService productSupplierService) {
 		super(logger);
 		this.productSupplierService = productSupplierService;
 		productSupplierService.setSupplierService(this);

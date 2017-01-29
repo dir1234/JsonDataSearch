@@ -1,6 +1,6 @@
 package com.company.service;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,14 +20,14 @@ public class ProductService extends AbstractNamedService<Product> implements IPr
 	
 	@Autowired
 	@Qualifier("productFile")
-	private File productFile;
+	private InputStream productFile;
 	
 	public ProductService() {
 		super(logger);
 		this.setFileStore(productFile);
 	}
 	
-	public ProductService(File fileStore) {
+	public ProductService(InputStream fileStore) {
 		super(logger);
 		this.setFileStore(fileStore);
 	}

@@ -1,6 +1,6 @@
 package com.company.service;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,14 +19,14 @@ public class CustomerService extends AbstractNamedService<Customer> implements I
 	
 	@Autowired
 	@Qualifier("customerFile")
-	private File customerFile;
+	private InputStream customerFile;
 	
 	public CustomerService() {
 		super(logger);
 		this.setFileStore(customerFile);
 	}
 	
-	public CustomerService(File fileStore) {
+	public CustomerService(InputStream fileStore) {
 		super(logger);
 		this.setFileStore(fileStore);
 	}

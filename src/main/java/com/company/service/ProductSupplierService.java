@@ -2,6 +2,7 @@ package com.company.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -32,7 +33,7 @@ public class ProductSupplierService extends AbstractService<ProductSupplier> {
 	
 	@Autowired
 	@Qualifier("productSupplierFile")
-	private File productSupplierFile;
+	private InputStream productSupplierFile;
 	
 	@Autowired
 	private ProductService productService;
@@ -43,7 +44,7 @@ public class ProductSupplierService extends AbstractService<ProductSupplier> {
 		this.setFileStore(productSupplierFile);
 	}
 	
-	public ProductSupplierService(File fileStore) {
+	public ProductSupplierService(InputStream fileStore) {
 		super(logger);
 		this.setFileStore(fileStore);
 	}

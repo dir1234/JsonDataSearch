@@ -1,10 +1,11 @@
 package com.company;
 
-import java.io.File;
-import java.util.function.Function;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 import com.company.service.CustomerService;
 import com.company.service.ProductService;
@@ -14,62 +15,54 @@ import com.company.service.SupplierService;
 @Configuration	
 public class JsonDataSearchConfiguration {
 
-	private Function<String, File> getResourceFile = filename -> {
-		ClassLoader cl = getClass().getClassLoader();
-		String path = null;
-		try {
-			path = cl.getResource(filename).getFile();
-		} catch (NullPointerException npe) {
-			// file not found, other areas of code advised to expect null value!
-		}
-		if (path != null) {
-			File f = new File(cl.getResource(filename).getFile());
-			return f;
-		}
-		return new File(filename);
-	};
-	
+	 protected InputStream loadResource(String fileName) throws IOException {
+		 ClassPathResource classPathResource = new ClassPathResource(fileName);
+         return classPathResource.getInputStream();
+     }
+	 
 	// Data Files
 	
 	@Bean(name="customerFile")
-	public File customerFile() {
-		return getResourceFile.apply("customers.json");
+	public InputStream customerFile() throws IOException {
+		return loadResource("customers.json");
+		//return getResourceFile.apply("customers.json");
 	}
 	
 	@Bean(name="productFile")
-	public File productFile() {
-		return getResourceFile.apply("products.json");
+	public InputStream productFile() throws IOException {
+		return loadResource("products.json");
+		//return getResourceFile.apply("products.json");
 	}
 	
 	@Bean(name="supplierFile")
-	public File supplierFile() {
-		return getResourceFile.apply("suppliers.json");
+	public InputStream supplierFile() throws IOException {
+		return loadResource("suppliers.json");
 	}
 	
 	@Bean(name="productSupplierFile")
-	public File productSupplierFile() {
-		return getResourceFile.apply("product_suppliers.json");
+	public InputStream productSupplierFile() throws IOException {
+		return loadResource("product_suppliers.json");
 	}
 	
 	// Services
 	
 	@Bean
-	public CustomerService customerService() {
+	public CustomerService customerService() throws IOException {
 		return new CustomerService(customerFile());
 	}
 	
 	@Bean
-	public ProductService productService() {
+	public ProductService productService() throws IOException {
 		return new ProductService(productFile());
 	}
 	
 	@Bean
-	public SupplierService supplierService() {
+	public SupplierService supplierService() throws IOException {
 		return new SupplierService(supplierFile(), productSupplierService());
 	}
 	
 	@Bean
-	public ProductSupplierService productSupplierService() {
+	public ProductSupplierService productSupplierService() throws IOException {
 		return new ProductSupplierService(productSupplierFile());
 	}
 	

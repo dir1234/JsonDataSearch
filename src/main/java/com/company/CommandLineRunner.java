@@ -75,7 +75,6 @@ public class CommandLineRunner<T extends NamedObject> implements ApplicationRunn
 		if (this.getCommandLineArguments().containsKey(PROPERTY_GENERATE_PRODUCT_SUPPLIERS)) {
 			String filename = this.getCommandLineArguments().get(PROPERTY_GENERATE_PRODUCT_SUPPLIERS);
 			productSupplierService.generateJsonDataFile(filename);
-			System.out.println("JSON data output to " + filename);
 			return false;
 		}
 		

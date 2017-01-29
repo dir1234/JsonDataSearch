@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import org.junit.Before;
@@ -30,15 +30,15 @@ public class AbstractNamedServiceTests {
 	
 	@Autowired
 	@Qualifier("customerFile")
-	private File customerFile;
+	private InputStream customerFile;
 	
 	@Autowired
 	@Qualifier("missingFile")
-	private File missingFile;
+	private InputStream missingFile;
 	
 	@Autowired
 	@Qualifier("corruptFile")
-	private File corruptFile;
+	private InputStream corruptFile;
 	
 	@Before
 	public void setUp() {
