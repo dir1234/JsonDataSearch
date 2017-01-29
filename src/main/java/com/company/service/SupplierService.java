@@ -70,6 +70,8 @@ public class SupplierService extends AbstractNamedService<Supplier> implements I
 	public List<Supplier> filterBy(List<Supplier> list, String filterType, String filterValue) {
 		if ("product".equals(filterType))
 			return filterByProductName(list, filterValue);
+		if ("productname".equals(filterValue))
+			return filterByProductName(list, filterValue);
 		return list;
 	}
 	
